@@ -7,12 +7,42 @@ import Interfaces.iActorBehaviour;
 import Interfaces.iMarcketBehaviour;
 import Interfaces.iQueueBehaviour;
 
+/**
+ * Класс, который описывает методы длясостояния магазина и состояния очереди
+ * очереди
+ */
 public class Market implements iMarcketBehaviour, iQueueBehaviour {
+    // Поля
+    private List<iActorBehaviour> queue; // Список очереди
+    private int maxParticipants; // Количество участников промо акции
 
-    private List<iActorBehaviour> queue;
+    /**
+     * Конструктор для магазина c акцией
+     * 
+     * @param maxParticipants
+     */
+    public Market(int maxParticipants) {
+        this.queue = new ArrayList<iActorBehaviour>();
+        setMaxParticipants(maxParticipants);
+    }
 
+    /**
+     * Конструктор для магазина
+     */
     public Market() {
         this.queue = new ArrayList<iActorBehaviour>();
+    }
+
+    // Методы
+    public int getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(int value) {
+        if (value < 1) {
+            this.maxParticipants = 1;
+        } else
+            this.maxParticipants = value;
     }
 
     @Override
@@ -23,9 +53,17 @@ public class Market implements iMarcketBehaviour, iQueueBehaviour {
 
     @Override
     public void takeInQueue(iActorBehaviour actor) {
-        this.queue.add(actor);
-        System.out.println(actor.getActor().getName() + " клиент добавлен в очередь ");
+        if (actor instanceof PromoClient) {
+            PromoClient promoClient = (PromoClient) actor;
+            if (promoClient.getCountMembers() > maxParticipants) {
+                System.out.println("Отказ в обслуживании " + actor.getActor().getName() +
+                        ". Превышено количество участников акции.");
+            return;
+        }
     }
+    this.queue.add(actor);
+    System.out.println(actor.getActor().getName() + " клиент добавлен в очередь ");
+}
 
     @Override
     public void releseFromMarket(List<Actor> actors) {

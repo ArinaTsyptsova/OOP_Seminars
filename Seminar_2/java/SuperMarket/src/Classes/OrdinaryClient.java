@@ -1,10 +1,21 @@
 package Classes;
 
-public class OrdinaryClient extends Actor {
+import Interfaces.iReturnOrder;
+
+/**
+ * Класс для простого клиента
+ */
+public class OrdinaryClient extends Actor implements iReturnOrder {
+    /**
+     * Конструктор
+     *
+     * @param name
+     */
     public OrdinaryClient(String name) {
         super(name);
     }
 
+    // Методы
     public boolean isTakeOrder() {
         return super.isTakeOrder;
     }
@@ -24,14 +35,4 @@ public class OrdinaryClient extends Actor {
     public Actor getActor() {
         return this;
     }
-
-    public String getName() {
-        return super.name;
-    }
-
-    @Override
-    public void setName(String name) {
-        super.name = name;
-    }
-
 }

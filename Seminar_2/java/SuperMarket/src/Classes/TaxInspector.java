@@ -7,10 +7,14 @@ public class TaxInspector implements iActorBehaviour {
     private boolean isTakeOrder;
     private boolean isMakeOrder;
 
+    /**
+     * Конструктор
+     */
     public TaxInspector() {
         this.name = "Tax audit";
     }
 
+    // Методы
     public String getName() {
         return name;
     }

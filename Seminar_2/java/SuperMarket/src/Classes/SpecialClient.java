@@ -1,13 +1,26 @@
 package Classes;
 
-public class SpecialClient extends Actor {
-    private int idVIP;
+import Interfaces.iReturnOrder;
 
+/**
+ * Класс для vip клиента
+ */
+public class SpecialClient extends Actor implements iReturnOrder {
+    // Поле
+    private int idVIP; // id покупателя
+
+    /**
+     * Конструктор
+     * 
+     * @param name
+     * @param idVIP
+     */
     public SpecialClient(String name, int idVIP) {
         super(name);
         this.idVIP = idVIP;
     }
 
+    // Методы
     public boolean isTakeOrder() {
         return super.isTakeOrder;
     }
@@ -27,15 +40,4 @@ public class SpecialClient extends Actor {
     public Actor getActor() {
         return this;
     }
-
-    public String getName() {
-        return super.name;
-    }
-
-    @Override
-    public void setName(String name) {
-        super.name = name;
-    }
-
 }
-
